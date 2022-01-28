@@ -3,6 +3,8 @@ from pygame import sprite
 from typing import Any
 from sys import exit
 
+import globals
+
 
 class Actor(sprite.Sprite):
     """Default actor class, basically pygame.sprite.Sprite."""
@@ -27,5 +29,14 @@ class Actor(sprite.Sprite):
         self.handleInput()
 
         if 'dt' in kwargs:
-            self.rect.x = self.velocity[0] * kwargs['dt']
-            self.rect.y = self.velocity[1] * kwargs['dt']
+            self.rect.x += self.velocity[0] * (kwargs['dt'] / 3)
+            self.rect.y += self.velocity[1] * (kwargs['dt'] / 3)
+
+        if self.rect.x >= globals.WIDTH + 50:
+            self.rect.x = -50
+        if self.rect.x < -50:
+            self.rect.x = globals.WIDTH + 50
+        if self.rect.y >= globals.HEIGHT + 50:
+            self.rect.y = -50
+        if self.rect.y < -50:
+            self.rect.y = globals.HEIGHT + 50
