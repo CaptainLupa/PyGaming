@@ -29,8 +29,8 @@ class Actor(sprite.Sprite):
         self.handleInput()
 
         if 'dt' in kwargs:
-            self.rect.x += self.velocity[0] * (kwargs['dt'] / 3)
-            self.rect.y += self.velocity[1] * (kwargs['dt'] / 3)
+            self.rect.x += round(self.velocity[0] * (kwargs['dt'] / 3))
+            self.rect.y += round(self.velocity[1] * (kwargs['dt'] / 3))
 
         if self.rect.x >= globals.WIDTH + 50:
             self.rect.x = -50

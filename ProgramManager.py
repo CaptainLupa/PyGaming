@@ -3,25 +3,26 @@ import sys
 import globals
 import Scene
 import DefaultScene
+import MainMenu
 
 
 class ProgramManager:
     def __init__(self):
         self.screen = pygame.display.set_mode(globals.SIZE)
-        self.scene = DefaultScene.DefaultScene()
+        self.aspectRatio = globals.WIDTH / globals.HEIGHT
         self.clock = pygame.time.Clock()
+        self.scene = MainMenu.MainMenu(self)
 
     def mainLoop(self):
         fps = pygame.font.SysFont("", 25)
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                     sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    print("hello")
 
             globals.KEYS_PRESSED = pygame.key.get_pressed()
             globals.MOUSE_BUTTONS = pygame.mouse.get_pressed()
+            globals.MOUSE_POS = pygame.mouse.get_pos()
 
             self.scene.update(self.clock.get_time())
             # print(self.clock.get_time())
@@ -34,3 +35,7 @@ class ProgramManager:
 
     def changeScene(self, scene: Scene.Scene):
         self.scene = scene
+
+    @staticmethod
+    def delScene(scene):
+        del scene

@@ -27,9 +27,9 @@ class Button(UI):
         self.args = args
 
     def update(self, *args: Any, **kwargs: Any) -> None:
-        from globals import MOUSE_BUTTONS
+        from globals import MOUSE_BUTTONS, MOUSE_POS
 
-        if MOUSE_BUTTONS[0]:
+        if MOUSE_BUTTONS[0] and self.rect.collidepoint(MOUSE_POS):
             if self.args is not None:
                 self.action(self.args)
             else:
