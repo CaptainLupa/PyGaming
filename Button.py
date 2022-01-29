@@ -12,7 +12,7 @@ class Button(UI):
                  rectSize: tuple = (120, 60),
                  rectPos: tuple = (0, 0),
                  imageName: str = "allahLumine.JPG",
-                 action: Callable = None,
+                 action=None,
                  args: list = None,
                  ):
         # -----------------------------------
@@ -27,7 +27,10 @@ class Button(UI):
         self.args = args
 
     def update(self, *args: Any, **kwargs: Any) -> None:
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.rect.collidepoint(event.pos):
-                    self.action(self.args)
+        from globals import MOUSE_BUTTONS
+
+        if MOUSE_BUTTONS[0]:
+            if self.args is not None:
+                self.action(self.args)
+            else:
+                self.action()

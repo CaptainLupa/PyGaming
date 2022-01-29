@@ -17,8 +17,11 @@ class ProgramManager:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print("hello")
 
             globals.KEYS_PRESSED = pygame.key.get_pressed()
+            globals.MOUSE_BUTTONS = pygame.mouse.get_pressed()
 
             self.scene.update(self.clock.get_time())
             # print(self.clock.get_time())
