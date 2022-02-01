@@ -7,6 +7,8 @@ from DefaultScene import DefaultScene
 class MainMenu(Scene.Scene):
     def __init__(self, main):
         self.startButton = Button(
+            text="Start",
+            textColor=(255, 255, 255),
             action=self.start
         )
         super().__init__()

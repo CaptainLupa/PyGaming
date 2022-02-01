@@ -23,6 +23,7 @@ class Button(UI):
         self.rect = pygame.rect.Rect(rectPos, rectSize)
         self.image = pygame.image.load(imageName)
         self.image = pygame.transform.scale(self.image, rectSize)
+        # self.image.blit(self.fontObj.render(self.text, True, self.textColor), (0, 0))
         self.action = action
         self.args = args
 
@@ -34,3 +35,5 @@ class Button(UI):
                 self.action(self.args)
             else:
                 self.action()
+
+        self.image.blit(self.fontObj.render(self.text, True, self.textColor), (0, 0))
