@@ -5,7 +5,19 @@ import pygame
 class Player(Actor.Actor):
     def __init__(self):
         super().__init__()
+        self.fo = pygame.font.SysFont("", 40)
         self.image = pygame.transform.scale(self.image, (200, 200))
+        self.image.blit(self.fo.render("Fart", True, (255, 255, 255)), (0, 0))
+        self.textRendered = True
+
+    def toggleText(self):
+        if self.textRendered:
+            self.image = self.originalImage
+            self.image = pygame.transform.scale(self.image, (200, 200))
+            self.textRendered = False
+        else:
+            self.image.blit(self.fo.render("Fart", True, (255, 255, 255)), (0, 0))
+            self.textRendered = True
 
     def handleInput(self):
         from globals import KEYS_PRESSED
@@ -27,5 +39,4 @@ class Player(Actor.Actor):
         # print(self.velocity)
 
         if KEYS_PRESSED[pygame.K_k]:
-            # shoot
-            pass
+            self.toggleText()

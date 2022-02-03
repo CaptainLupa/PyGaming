@@ -15,14 +15,22 @@ class ProgramManager:
 
     def mainLoop(self):
         fps = pygame.font.SysFont("", 25)
+        globals.KEYS_PRESSED = pygame.key.get_pressed()
+        globals.MOUSE_BUTTONS = pygame.mouse.get_pressed()
+        globals.MOUSE_POS = pygame.mouse.get_pos()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                     sys.exit()
 
-            globals.KEYS_PRESSED = pygame.key.get_pressed()
-            globals.MOUSE_BUTTONS = pygame.mouse.get_pressed()
-            globals.MOUSE_POS = pygame.mouse.get_pos()
+                if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                    globals.KEYS_PRESSED = pygame.key.get_pressed()
+
+                if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
+                    globals.MOUSE_BUTTONS = pygame.mouse.get_pressed()
+
+                if event.type == pygame.MOUSEMOTION:
+                    globals.MOUSE_POS = pygame.mouse.get_pos()
 
             self.scene.update(self.clock.get_time())
             # print(self.clock.get_time())
